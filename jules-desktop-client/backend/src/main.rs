@@ -1,3 +1,4 @@
+pub mod logger;
 mod cli;
 mod config;
 mod ipc;
