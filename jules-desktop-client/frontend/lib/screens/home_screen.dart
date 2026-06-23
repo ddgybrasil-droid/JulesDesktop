@@ -10,23 +10,28 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
-      body: Row(
-        children: [
-          Expanded(
-            flex: 2,
-            child: Column(
-              children: const [
-                TaskCreationPanel(),
-                Expanded(child: KanbanBoard()),
-              ],
+      backgroundColor: Colors.black,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 2,
+              child: Column(
+                children: const [
+                  TaskCreationPanel(),
+                  SizedBox(height: 16.0),
+                  Expanded(child: KanbanBoard()),
+                ],
+              ),
             ),
-          ),
-          const Expanded(
-            flex: 1,
-            child: ExecutionLog(),
-          ),
-        ],
+            const SizedBox(width: 16.0),
+            const Expanded(
+              flex: 1,
+              child: ExecutionLog(),
+            ),
+          ],
+        ),
       ),
     );
   }
