@@ -4,6 +4,18 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
+pub struct SyncFileEvent {
+    pub paths: Vec<String>,
+    pub target_branch: String,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct SyncStatusResponse {
+    pub status: String,
+    pub message: String,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Task {
     pub id: String,
     pub prompt: String,

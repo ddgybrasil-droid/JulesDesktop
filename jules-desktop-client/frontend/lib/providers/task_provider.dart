@@ -101,16 +101,39 @@ class TaskProvider extends ChangeNotifier {
   List<Task> get readyForPrTasks => _tasks.where((t) => t.status == TaskStatus.readyForPr).toList();
   List<Task> get completedTasks => _tasks.where((t) => t.status == TaskStatus.completed).toList();
 
+  List<String> _droppedAssets = [];
+  List<String> get droppedAssets => _droppedAssets;
+
+  void addAssets(List<String> paths) {
+    for (var path in paths) {
+      if (!_droppedAssets.contains(path)) {
+        _droppedAssets.add(path);
+      }
+    }
+    notifyListeners();
+  }
+
+  void removeAsset(String path) {
+    _droppedAssets.remove(path);
+    notifyListeners();
+  }
+
+  void clearAssets() {
+    _droppedAssets.clear();
+    notifyListeners();
+  }
+
   void sendTask(String prompt, String repo, String branch) {
     // Stub IPC call
-    print('Stub: sendTask($prompt, $repo, $branch)');
+    print('Stub: sendTask($prompt, $repo, $branch, assets: $_droppedAssets)');
     final newTask = Task(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       title: prompt,
-      description: 'Repository: $repo, Branch: $branch',
+      description: 'Repository: $repo, Branch: $branch, Assets: ${_droppedAssets.length}',
       status: TaskStatus.queued,
     );
     _tasks.add(newTask);
+    clearAssets();
     notifyListeners();
   }
 
@@ -125,5 +148,11 @@ class TaskProvider extends ChangeNotifier {
       _tasks[index].status = newStatus;
       notifyListeners();
     }
+  }
+
+  // Mock IPC method for SyncFileEvent
+  void syncLocalContext(List<String> paths, String targetBranch) {
+    print('Stub IPC Request: syncLocalContext(paths: $paths, targetBranch: $targetBranch)');
+    // In a real implementation, this would send a SyncFileEvent to Rust.
   }
 }

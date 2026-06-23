@@ -2,6 +2,7 @@ mod cli;
 mod config;
 mod ipc;
 mod proxy_client;
+mod git_sync;
 
 #[tokio::main]
 async fn main() {

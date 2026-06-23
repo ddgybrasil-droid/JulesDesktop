@@ -18,6 +18,18 @@ pub struct IpcResponse {
     pub error: Option<String>,
 }
 
+#[derive(Deserialize, Debug)]
+pub struct SyncFileEvent {
+    pub paths: Vec<String>,
+    pub target_branch: String,
+}
+
+#[derive(Serialize, Debug)]
+pub struct SyncStatusResponse {
+    pub status: String,
+    pub message: String,
+}
+
 /// Stub function to start the listener loop
 pub async fn start_listener() {
     // Loop over std::io::stdin().lines()
