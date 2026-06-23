@@ -2,6 +2,40 @@
 // Represents a task that is synchronized between frontend and backend.
 // Note: In a real app, you'd use json_serializable or similar.
 
+class SyncFileEvent {
+  final List<String> paths;
+  final String targetBranch;
+
+  SyncFileEvent({
+    required this.paths,
+    required this.targetBranch,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'paths': paths,
+      'target_branch': targetBranch,
+    };
+  }
+}
+
+class SyncStatusResponse {
+  final String status;
+  final String message;
+
+  SyncStatusResponse({
+    required this.status,
+    required this.message,
+  });
+
+  factory SyncStatusResponse.fromJson(Map<String, dynamic> json) {
+    return SyncStatusResponse(
+      status: json['status'] as String,
+      message: json['message'] as String,
+    );
+  }
+}
+
 enum TaskStatus {
   queued,
   inTesting,
