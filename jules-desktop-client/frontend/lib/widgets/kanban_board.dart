@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/task_provider.dart';
 import 'task_card.dart';
+import 'techno_metric_header.dart';
 
 class KanbanBoard extends StatelessWidget {
   const KanbanBoard({Key? key}) : super(key: key);
@@ -35,48 +36,10 @@ class KanbanBoard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Column Header
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
-            decoration: BoxDecoration(
-              color: const Color(0xFF1E1E1E),
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(8.0),
-                topRight: Radius.circular(8.0),
-              ),
-              border: Border(
-                top: BorderSide(color: accentColor, width: 2.0),
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  title.toUpperCase(),
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.2,
-                    fontSize: 12.0,
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
-                  decoration: BoxDecoration(
-                    color: accentColor.withValues(alpha: 0.2),
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                  child: Text(
-                    '${tasks.length}',
-                    style: TextStyle(
-                      color: accentColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12.0,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+          TechnoMetricHeader(
+            title: title,
+            metric: tasks.length.toString(),
+            accentColor: accentColor,
           ),
 
           // Column Body
