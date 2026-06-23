@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/log_provider.dart';
+import 'techno_metric_header.dart';
 
 // Stub: Terminal-like widget that displays streamed stdout from Rust
 class ExecutionLog extends StatefulWidget {
@@ -39,15 +40,12 @@ class _ExecutionLogState extends State<ExecutionLog> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
-            'Execution Log',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
+          TechnoMetricHeader(
+            title: 'EXECUTION LOG',
+            metric: logs.length.toString(),
+            accentColor: Colors.orangeAccent,
           ),
-          const Divider(color: Colors.grey),
+          const SizedBox(height: 8.0),
           Expanded(
             child: ListView.builder(
               controller: _scrollController,
