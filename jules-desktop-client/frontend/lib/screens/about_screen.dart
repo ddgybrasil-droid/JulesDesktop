@@ -7,7 +7,12 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('About')),
+      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        title: const Text('About'),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
       body: const Center(
         child: Text('Stub: About Jules.ai Desktop Client'),
       ),

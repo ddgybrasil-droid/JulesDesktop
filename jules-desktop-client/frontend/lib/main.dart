@@ -27,8 +27,37 @@ class JulesDesktopApp extends StatelessWidget {
     return MaterialApp(
       title: 'Jules.ai Client',
       theme: ThemeData(
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: Colors.transparent,
         primarySwatch: Colors.blue,
       ),
+      builder: (context, child) {
+        return Stack(
+          children: [
+            Positioned.fill(
+              child: Image.asset(
+                'assets/lake_background.jpg',
+                fit: BoxFit.cover,
+              ),
+            ),
+            Positioned.fill(
+              child: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: const AssetImage('assets/noise.png'),
+                    repeat: ImageRepeat.repeat,
+                    colorFilter: ColorFilter.mode(
+                      Colors.black.withValues(alpha: 0.15),
+                      BlendMode.srcOver,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            if (child != null) child,
+          ],
+        );
+      },
       home: const MainLayout(),
     );
   }
@@ -54,8 +83,11 @@ class _MainLayoutState extends State<MainLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
