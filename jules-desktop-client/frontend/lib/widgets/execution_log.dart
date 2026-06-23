@@ -34,40 +34,56 @@ class _ExecutionLogState extends State<ExecutionLog> {
     });
 
     return Container(
-      color: Colors.black,
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const Text(
-            'Execution Log',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
+      decoration: BoxDecoration(
+        color: const Color(0xFF0A0A0A), // Slightly off-black for the terminal
+        border: Border.all(color: Colors.white24, width: 1.0),
+        borderRadius: BorderRadius.circular(16.0),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(15.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+              decoration: const BoxDecoration(
+                color: Color(0xFF1E1E1E),
+                border: Border(
+                  bottom: BorderSide(color: Colors.white24, width: 1.0),
+                ),
+              ),
+              child: const Text(
+                'EXECUTION LOG',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.2,
+                  fontSize: 12.0,
+                ),
+              ),
             ),
-          ),
-          const Divider(color: Colors.grey),
-          Expanded(
-            child: ListView.builder(
-              controller: _scrollController,
-              itemCount: logs.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 2.0),
-                  child: Text(
-                    logs[index],
-                    style: const TextStyle(
-                      color: Colors.green,
-                      fontFamily: 'monospace',
-                      fontSize: 14,
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.all(12.0),
+                controller: _scrollController,
+                itemCount: logs.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 2.0),
+                    child: Text(
+                      logs[index],
+                      style: const TextStyle(
+                        color: Colors.greenAccent,
+                        fontFamily: 'monospace',
+                        fontSize: 13,
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
