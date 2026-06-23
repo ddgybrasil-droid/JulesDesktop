@@ -5,6 +5,7 @@ import 'providers/log_provider.dart';
 import 'screens/home_screen.dart';
 import 'screens/about_screen.dart';
 import 'screens/settings_screen.dart';
+import 'widgets/support_dialog.dart';
 
 // Stub: Main entry point for the Flutter app.
 void main() {
@@ -26,8 +27,8 @@ class JulesDesktopApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Jules.ai Client',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: const Color(0xFF0A0A0A), // Dark techno-brutalist theme background
       ),
       home: const MainLayout(),
     );
@@ -54,6 +55,36 @@ class _MainLayoutState extends State<MainLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Jules.ai'),
+        backgroundColor: const Color(0xFF0F0F0F),
+        elevation: 0,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            child: OutlinedButton.icon(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => const SupportDialog(),
+                );
+              },
+              icon: const Icon(Icons.favorite, color: Colors.pinkAccent, size: 18),
+              label: const Text(
+                'Support the Creator',
+                style: TextStyle(color: Colors.white),
+              ),
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(color: Colors.white24, width: 1.0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                backgroundColor: const Color(0xFF1A1A1A),
+              ),
+            ),
+          )
+        ],
+      ),
       body: _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
