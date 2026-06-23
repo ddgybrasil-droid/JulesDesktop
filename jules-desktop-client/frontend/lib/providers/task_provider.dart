@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 
 enum TaskStatus {
@@ -102,10 +104,22 @@ class TaskProvider extends ChangeNotifier {
   List<Task> get completedTasks => _tasks.where((t) => t.status == TaskStatus.completed).toList();
 
   void sendTask(String prompt, String repo, String branch) {
-    // Stub IPC call
-    print('Stub: sendTask($prompt, $repo, $branch)');
+    final requestId = DateTime.now().millisecondsSinceEpoch.toString();
+
+    // IPC call via stdio
+    final request = {
+      'id': requestId,
+      'command': 'send_task',
+      'payload': {
+        'prompt': prompt,
+        'repo': repo,
+        'branch': branch,
+      }
+    };
+    stdout.writeln(jsonEncode(request));
+
     final newTask = Task(
-      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      id: requestId,
       title: prompt,
       description: 'Repository: $repo, Branch: $branch',
       status: TaskStatus.queued,
