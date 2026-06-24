@@ -14,5 +14,5 @@ async fn main() {
     // process them, and write responses/events to stdout.
     println!("Starting Jules backend IPC listener...");
 
-    // Example: ipc::start_listener(config).await;
+    ipc::start_listener().await;
 }
