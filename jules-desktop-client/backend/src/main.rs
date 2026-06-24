@@ -2,6 +2,7 @@ mod cli;
 mod config;
 mod ipc;
 mod proxy_client;
+pub mod tools_hub;
 
 #[tokio::main]
 async fn main() {
