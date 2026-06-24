@@ -2,6 +2,7 @@ mod cli;
 mod config;
 mod ipc;
 mod proxy_client;
+pub mod tools_hub;
 
 #[tokio::main]
 async fn main() {
@@ -13,5 +14,5 @@ async fn main() {
     // process them, and write responses/events to stdout.
     println!("Starting Jules backend IPC listener...");
 
-    // Example: ipc::start_listener(config).await;
+    ipc::start_listener().await;
 }
