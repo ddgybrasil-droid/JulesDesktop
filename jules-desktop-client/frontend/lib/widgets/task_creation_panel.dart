@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/task_provider.dart';
 import '../providers/log_provider.dart';
+import 'secure_env_masker_card.dart';
 
 // Stub: Form panel to create and send a new task
 class TaskCreationPanel extends StatefulWidget {
@@ -66,6 +67,8 @@ class _TaskCreationPanelState extends State<TaskCreationPanel> {
             'Task Creation Panel',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
+          const SizedBox(height: 16),
+          const SecureEnvMaskerCard(),
           const SizedBox(height: 16),
           TextField(
             controller: _promptController,
